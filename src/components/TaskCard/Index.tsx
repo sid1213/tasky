@@ -1,16 +1,18 @@
-import { Avatar, Badge, Card, Col, Row, Skeleton, Typography } from "antd";
-import { EditOutlined, SettingOutlined } from "@ant-design/icons";
+import { Avatar, Badge, Card, Skeleton, Tooltip } from "antd";
+import { EditOutlined, EyeOutlined } from "@ant-design/icons";
 import Style from "./index.module.scss";
 const { Meta } = Card;
 
 const TaskCard = () => {
   return (
     <Card
-      actions={[<SettingOutlined key="setting" />, <EditOutlined key="edit" />]}
+      actions={[<EyeOutlined key="view" />, <EditOutlined key="edit" />]}
       className={Style.Card}
     >
       <span className={Style.Priority}>
-        <Badge status="error" dot size="default" />
+        <Tooltip placement="topLeft" title={"High Priority"}>
+          <Badge status="error" dot size="default" />
+        </Tooltip>
       </span>
       <Skeleton loading={false} avatar active>
         <Meta
