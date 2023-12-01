@@ -1,29 +1,58 @@
-import { Avatar, Badge, Card, Skeleton, Tooltip } from "antd";
+import React, { useEffect } from "react";
+import { Avatar, Card, Skeleton, Badge } from "antd";
 import { EditOutlined, EyeOutlined } from "@ant-design/icons";
 import Style from "./index.module.scss";
+import { Task } from "../../types";
+import { useTaskContext } from "../../context/AppContext";
 const { Meta } = Card;
+interface PropType extends Task {
+  editId: string | null;
+  setEditId: React.Dispatch<React.SetStateAction<string | null>>;
+  setEditFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const TaskCard: React.FC<PropType> = ({
+  title,
+  description,
+  id,
+  cStatus,
+  setEditId,
+  setEditFormOpen,
+}) => {
+  useEffect(() => {
+    setEditFormOpen(false);
+  }, [setEditId, setEditFormOpen]);
 
-const TaskCard = () => {
   return (
-    <Card
-      actions={[<EyeOutlined key="view" />, <EditOutlined key="edit" />]}
-      className={Style.Card}
+    <Badge.Ribbon
+      text="Completed"
+      color="green"
+      style={{ display: cStatus === "done" ? "block" : "none" }}
+      rootClassName={Style.badge}
     >
-      <span className={Style.Priority}>
-        <Tooltip placement="topLeft" title={"High Priority"}>
-          <Badge status="error" dot size="default" />
-        </Tooltip>
-      </span>
-      <Skeleton loading={false} avatar active>
-        <Meta
-          avatar={
-            <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=2" />
-          }
-          title="Wake Up"
-          description="I Wanna Wake up At 6AM Daily. loremImlcjdsvudcuagsvxhasvgusgdubsdvsodh bdhiosvuqsvdvqdhqvdhiqvdhivqwhix bjsx;jsjonwjoklscjsbdcjdwc sfnkf manjanljahdjdouandlmndksndndklnsd;nsddhudhbckdbfidgfagfiyhouqyrqjei ke[ idojsxks    xgd7uhowhdhuhouqydoqwjdkjdohdoq"
-        />
-      </Skeleton>
-    </Card>
+      <Card
+        actions={[
+          <EyeOutlined key="view" disabled />,
+          <EditOutlined
+            key="edit"
+            onClick={() => {
+              setEditId(id);
+              setEditFormOpen(true);
+            }}
+          />,
+        ]}
+        className={Style.Card}
+      >
+        <Skeleton loading={false} avatar active>
+          <Meta
+            avatar={
+              <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=2" />
+            }
+            title={title}
+            description={description}
+          />
+        </Skeleton>
+      </Card>
+    </Badge.Ribbon>
   );
 };
 
