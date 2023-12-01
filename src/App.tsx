@@ -1,11 +1,14 @@
+import React from "react";
 import "./App.scss";
-
 import Container from "./components/Container";
+import { TaskProvider } from "./context/AppContext";
 
 function App() {
   return (
     <div className="App">
-      <Container />
+      <TaskProvider>
+        <Container />
+      </TaskProvider>
     </div>
   );
 }
