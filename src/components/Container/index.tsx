@@ -4,11 +4,9 @@ import {
   DoubleLeftOutlined,
   DoubleRightOutlined,
   SettingOutlined,
-  UploadOutlined,
   UserOutlined,
-  VideoCameraOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, Button, theme, Typography } from "antd";
+import { Layout, Menu, Button, Typography } from "antd";
 
 import Style from "./index.module.scss";
 import ContentBox from "../ContentBox/Index";
@@ -16,10 +14,7 @@ import ContentBox from "../ContentBox/Index";
 const { Sider, Content } = Layout;
 const { Title } = Typography;
 const Container: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
+  const [collapsed, setCollapsed] = useState(true);
 
   return (
     <Layout className={Style.Container}>
@@ -36,7 +31,7 @@ const Container: React.FC = () => {
         collapsed={collapsed}
       >
         <Title level={2} color={"white"} className={Style.Title}>
-          TASKY
+          T
         </Title>
         <Menu
           theme="dark"
