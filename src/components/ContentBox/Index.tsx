@@ -1,95 +1,93 @@
+import React, { useEffect, useState } from "react";
+
 import Style from "./index.module.scss";
-import {
-  Col,
-  FloatButton,
-  Form,
-  Input,
-  Modal,
-  Row,
-  Select,
-  Typography,
-} from "antd";
+import { Col, Row, Typography } from "antd";
 import TaskCard from "../TaskCard/Index";
-import { PlusSquareOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import AddTask from "../AddTask";
+import { useTaskContext } from "../../context/AppContext";
+import EditTask from "../EditTask";
 
 const { Title } = Typography;
-const { Option } = Select;
-const ContentBox = () => {
-  // const [loading, setLoading] = useState(true);
-  const [open, setOpen] = useState<boolean>(false);
-  const handleCancel = () => {
-    setOpen(false);
-  };
+
+const ContentBox: React.FC = () => {
+  const { tasks } = useTaskContext();
+  const [editFromOpen, setEditFormOpen] = useState<boolean>(false);
+
+  const [editId, setEditId] = useState<string | null>(null);
+  useEffect(() => {
+    if (editId !== null) {
+      setEditId(editId);
+    }
+  }, [setEditFormOpen, editId, tasks, setEditId]);
+
   return (
     <div className={Style.ContentBox}>
       <Title level={3}>TASK MANAGER</Title>
-
-      <Row className={Style.header}>
-        <Col span={8} className={Style.TaskContainer}>
-          <Title level={5}>🤯 HIGH</Title>
-        </Col>
-        <Col span={8} className={Style.TaskContainer}>
-          <Title level={5}> 🚨 MEDIUM</Title>
-        </Col>
-        <Col span={8} className={Style.TaskContainer}>
-          <Title level={5}> ❗️ LOW</Title>
-        </Col>
-      </Row>
       <Row justify={"center"}>
-        <Col span={8} className={Style.TaskContainer}>
-          <TaskCard />
-          <TaskCard />
-          <TaskCard />
-        </Col>
-        <Col span={8} className={Style.TaskContainer}>
-          <TaskCard />
-          <TaskCard />
-          <TaskCard />
-          <TaskCard />
-          <TaskCard />
-          <TaskCard />
-          <TaskCard />
-        </Col>
-        <Col span={8} className={Style.TaskContainer}>
-          <TaskCard />
-          <TaskCard />
+        <Col span={24} md={8} className={Style.TaskContainer}>
+          <Title level={5}>🤯 HIGH</Title>
 
-          <TaskCard />
-          <TaskCard />
+          {tasks
+            .filter((task) => task.priority === "high")
+            .map((task) => (
+              <TaskCard
+                id={task.id}
+                description={task.description}
+                priority={task.priority}
+                title={task.title}
+                key={task.id}
+                cStatus={task.cStatus}
+                editId={editId}
+                setEditId={setEditId}
+                setEditFormOpen={setEditFormOpen}
+              />
+            ))}
+        </Col>
+        <Col span={24} md={8} className={Style.TaskContainer}>
+          <Title level={5}> 🚨 MEDIUM</Title>
+
+          {tasks
+            .filter((task) => task.priority === "medium")
+            .map((task) => (
+              <TaskCard
+                id={task.id}
+                description={task.description}
+                priority={task.priority}
+                title={task.title}
+                cStatus={task.cStatus}
+                key={task.id}
+                editId={editId}
+                setEditId={setEditId}
+                setEditFormOpen={setEditFormOpen}
+              />
+            ))}
+        </Col>
+        <Col span={24} md={8} className={Style.TaskContainer}>
+          <Title level={5}> ❗️ LOW</Title>
+
+          {tasks
+            .filter((task) => task.priority === "low")
+            .map((task) => (
+              <TaskCard
+                id={task.id}
+                description={task.description}
+                priority={task.priority}
+                title={task.title}
+                cStatus={task.cStatus}
+                key={task.id}
+                editId={editId}
+                setEditId={setEditId}
+                setEditFormOpen={setEditFormOpen}
+              />
+            ))}
         </Col>
       </Row>
-      <FloatButton
-        rootClassName={Style.Add}
-        type="primary"
-        tooltip={"Add new task"}
-        icon={<PlusSquareOutlined />}
-        className={Style.Add}
-        onClick={() => setOpen(true)}
-      />
-      <Modal
-        title="Add new Task"
-        open={open}
-        okText="Add"
-        onCancel={handleCancel}
-        onOk={handleCancel}
-      >
-        <Form name="Add Task" layout="vertical">
-          <Form.Item name={"title"} label="Title">
-            <Input />
-          </Form.Item>
-          <Form.Item name={"description"} label="Description">
-            <Input />
-          </Form.Item>
-          <Form.Item name="priority" label="Priority">
-            <Select allowClear>
-              <Option value="high">High</Option>
-              <Option value="medium">Medium</Option>
-              <Option value="low">Low</Option>
-            </Select>
-          </Form.Item>
-        </Form>
-      </Modal>
+      <AddTask />
+      {editId !== null ? (
+        <EditTask id={editId} open={editFromOpen} setOpen={setEditFormOpen} />
+      ) : (
+        ""
+      )}
     </div>
   );
 };
