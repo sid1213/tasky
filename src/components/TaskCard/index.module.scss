@@ -16,7 +16,11 @@
   }
   :global(.ant-card-actions li) {
     margin: 0;
+  }
+  :global(.ant-card-actions .ant-flex) {
+    margin: 0;
     padding: 0.8rem 0;
+    justify-content: center;
     border-color: $DarkBlue !important;
   }
   :global(.ant-card-meta-description) {

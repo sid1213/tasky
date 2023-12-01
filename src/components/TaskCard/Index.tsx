@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { Avatar, Card, Skeleton, Badge } from "antd";
-import { EditOutlined, EyeOutlined } from "@ant-design/icons";
+import { Avatar, Card, Skeleton, Badge, Flex } from "antd";
+import { EditOutlined } from "@ant-design/icons";
 import Style from "./index.module.scss";
 import { Task } from "../../types";
 
@@ -14,7 +14,7 @@ const TaskCard: React.FC<PropType> = ({
   title,
   description,
   id,
-  priority,
+
   cStatus,
   setEditId,
   setEditFormOpen,
@@ -32,14 +32,16 @@ const TaskCard: React.FC<PropType> = ({
     >
       <Card
         actions={[
-          <span>{priority}</span>,
-          <EditOutlined
-            key="edit"
+          <Flex
+            justify="center "
             onClick={() => {
               setEditId(id);
               setEditFormOpen(true);
             }}
-          />,
+          >
+            <EditOutlined key="edit" />
+            &nbsp; Edit
+          </Flex>,
         ]}
         className={Style.Card}
       >
