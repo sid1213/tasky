@@ -34,72 +34,79 @@ const ContentBox: React.FC = () => {
           <Title level={5}> ❗️ LOW</Title>
         </Col>
       </Row>
-      <Row justify={"center"}>
-        <Col span={24} md={8} className={Style.TaskContainer}>
-          <Title level={5} className={Style.hide}>
-            🤯 HIGH
-          </Title>
+      <Row justify={"center"} align={"middle"} className={Style.tasks}>
+        {tasks.length !== 0 ? (
+          <>
+            <Col span={24} md={8} className={Style.TaskContainer}>
+              <Title level={5} className={Style.hide}>
+                🤯 HIGH
+              </Title>
+              {tasks
+                .filter((task) => task.priority === "high")
+                .map((task) => (
+                  <TaskCard
+                    id={task.id}
+                    description={task.description}
+                    priority={task.priority}
+                    title={task.title}
+                    key={task.id}
+                    cStatus={task.cStatus}
+                    editId={editId}
+                    setEditId={setEditId}
+                    setEditFormOpen={setEditFormOpen}
+                  />
+                ))}
+            </Col>
+            <Col span={24} md={8} className={Style.TaskContainer}>
+              <Title level={5} className={Style.hide}>
+                {" "}
+                🚨 MEDIUM
+              </Title>
 
-          {tasks
-            .filter((task) => task.priority === "high")
-            .map((task) => (
-              <TaskCard
-                id={task.id}
-                description={task.description}
-                priority={task.priority}
-                title={task.title}
-                key={task.id}
-                cStatus={task.cStatus}
-                editId={editId}
-                setEditId={setEditId}
-                setEditFormOpen={setEditFormOpen}
-              />
-            ))}
-        </Col>
-        <Col span={24} md={8} className={Style.TaskContainer}>
-          <Title level={5} className={Style.hide}>
-            {" "}
-            🚨 MEDIUM
-          </Title>
+              {tasks
+                .filter((task) => task.priority === "medium")
+                .map((task) => (
+                  <TaskCard
+                    id={task.id}
+                    description={task.description}
+                    priority={task.priority}
+                    title={task.title}
+                    cStatus={task.cStatus}
+                    key={task.id}
+                    editId={editId}
+                    setEditId={setEditId}
+                    setEditFormOpen={setEditFormOpen}
+                  />
+                ))}
+            </Col>
+            <Col span={24} md={8} className={Style.TaskContainer}>
+              <Title level={5} className={Style.hide}>
+                {" "}
+                ❗️ LOW
+              </Title>
 
-          {tasks
-            .filter((task) => task.priority === "medium")
-            .map((task) => (
-              <TaskCard
-                id={task.id}
-                description={task.description}
-                priority={task.priority}
-                title={task.title}
-                cStatus={task.cStatus}
-                key={task.id}
-                editId={editId}
-                setEditId={setEditId}
-                setEditFormOpen={setEditFormOpen}
-              />
-            ))}
-        </Col>
-        <Col span={24} md={8} className={Style.TaskContainer}>
-          <Title level={5} className={Style.hide}>
-            {" "}
-            ❗️ LOW
+              {tasks
+                .filter((task) => task.priority === "low")
+                .map((task) => (
+                  <TaskCard
+                    id={task.id}
+                    description={task.description}
+                    priority={task.priority}
+                    title={task.title}
+                    cStatus={task.cStatus}
+                    key={task.id}
+                    editId={editId}
+                    setEditId={setEditId}
+                    setEditFormOpen={setEditFormOpen}
+                  />
+                ))}
+            </Col>
+          </>
+        ) : (
+          <Title level={2} type="secondary">
+            "Please Add Tasks"
           </Title>
-
-          {tasks
-            .filter((task) => task.priority === "low")
-            .map((task) => (
-              <TaskCard
-                id={task.id}
-                description={task.description}
-                priority={task.priority}
-                title={task.title}
-                cStatus={task.cStatus}
-                key={task.id}
-                editId={editId}
-                setEditId={setEditId}
-                setEditFormOpen={setEditFormOpen}
-              />
-            ))}
-        </Col>
+        )}
       </Row>
       <AddTask />
       {editId !== null ? (

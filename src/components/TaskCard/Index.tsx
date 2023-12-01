@@ -3,7 +3,7 @@ import { Avatar, Card, Skeleton, Badge } from "antd";
 import { EditOutlined, EyeOutlined } from "@ant-design/icons";
 import Style from "./index.module.scss";
 import { Task } from "../../types";
-import { useTaskContext } from "../../context/AppContext";
+
 const { Meta } = Card;
 interface PropType extends Task {
   editId: string | null;
@@ -14,6 +14,7 @@ const TaskCard: React.FC<PropType> = ({
   title,
   description,
   id,
+  priority,
   cStatus,
   setEditId,
   setEditFormOpen,
@@ -31,7 +32,7 @@ const TaskCard: React.FC<PropType> = ({
     >
       <Card
         actions={[
-          <EyeOutlined key="view" disabled />,
+          <span>{priority}</span>,
           <EditOutlined
             key="edit"
             onClick={() => {
