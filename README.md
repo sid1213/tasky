@@ -20,10 +20,11 @@ And of course _TASKY_ itself is open source with a [public repository](https://g
 TASKY requires **[Node.js](https://nodejs.org/)** to run server.
 Install the dependencies and devDependencies and start the server.
 
-sh
+```sh
 cd folder_name
 npm create-react-app app-name
 npm start
+```
 
 ### How to work
 
