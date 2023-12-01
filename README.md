@@ -25,10 +25,6 @@ cd folder_name
 npm create-react-app app-name
 npm start
 
-### deployment
-
-use _AWS_ . It is a cloud platform that empowers developers to deploy, scale, and manage their web applications effortlessly, offering a seamless experience for hosting and managing projects.
-
 ### How to work
 
 - In Tasky, user can add their tasks as priority base.
