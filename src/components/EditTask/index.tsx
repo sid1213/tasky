@@ -39,7 +39,13 @@ const EditTask: React.FC<{
 
   return (
     <>
-      <Modal title="Add New Task" open={open} okText="Add" footer={null}>
+      <Modal
+        title="Add New Task"
+        open={open}
+        okText="Add"
+        footer={null}
+        onCancel={() => setOpen(false)}
+      >
         <Form
           name={`Add Task`}
           layout="vertical"

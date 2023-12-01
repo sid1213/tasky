@@ -23,9 +23,22 @@ const ContentBox: React.FC = () => {
   return (
     <div className={Style.ContentBox}>
       <Title level={3}>TASK MANAGER</Title>
+      <Row className={Style.header}>
+        <Col span={8} className={Style.TaskContainer}>
+          <Title level={5}>🤯 HIGH</Title>
+        </Col>
+        <Col span={8} className={Style.TaskContainer}>
+          <Title level={5}> 🚨 MEDIUM</Title>
+        </Col>
+        <Col span={8} className={Style.TaskContainer}>
+          <Title level={5}> ❗️ LOW</Title>
+        </Col>
+      </Row>
       <Row justify={"center"}>
         <Col span={24} md={8} className={Style.TaskContainer}>
-          <Title level={5}>🤯 HIGH</Title>
+          <Title level={5} className={Style.hide}>
+            🤯 HIGH
+          </Title>
 
           {tasks
             .filter((task) => task.priority === "high")
@@ -44,7 +57,10 @@ const ContentBox: React.FC = () => {
             ))}
         </Col>
         <Col span={24} md={8} className={Style.TaskContainer}>
-          <Title level={5}> 🚨 MEDIUM</Title>
+          <Title level={5} className={Style.hide}>
+            {" "}
+            🚨 MEDIUM
+          </Title>
 
           {tasks
             .filter((task) => task.priority === "medium")
@@ -63,7 +79,10 @@ const ContentBox: React.FC = () => {
             ))}
         </Col>
         <Col span={24} md={8} className={Style.TaskContainer}>
-          <Title level={5}> ❗️ LOW</Title>
+          <Title level={5} className={Style.hide}>
+            {" "}
+            ❗️ LOW
+          </Title>
 
           {tasks
             .filter((task) => task.priority === "low")

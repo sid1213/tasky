@@ -38,7 +38,13 @@ const AddTask: React.FC = () => {
         icon={<PlusSquareOutlined />}
         onClick={() => setOpen(true)}
       />
-      <Modal title="Add New Task" open={open} okText="Add" footer={null}>
+      <Modal
+        title="Add New Task"
+        open={open}
+        onCancel={() => setOpen(false)}
+        okText="Add"
+        footer={null}
+      >
         <Form
           name="Add Task"
           layout="vertical"

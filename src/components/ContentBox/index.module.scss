@@ -22,6 +22,9 @@
     :global(.ant-col) {
       padding-bottom: 0;
     }
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
   }
   .TaskContainer {
     padding: 1rem;
@@ -38,6 +41,12 @@
     :global(.ant-float-btn-content) {
       min-height: auto;
       padding: 0;
+    }
+  }
+  .hide {
+    display: none;
+    @media screen and (max-width: 768px) {
+      display: block;
     }
   }
 }
